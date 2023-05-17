@@ -13,8 +13,8 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
-ROW_COUNT = 6
-COLUMN_COUNT = 7
+num_row = 6
+num_col = 7
 
 PLAYER = 0
 AI = 1
@@ -26,7 +26,7 @@ AI = 1
 # WINDOW_LENGTH = 4
 
 def create_board():
-    board = np.zeros((ROW_COUNT, COLUMN_COUNT))
+    board = np.zeros((num_row, num_col))
     return board
 
 def print_board(board):
@@ -39,8 +39,8 @@ game_over = False
 pygame.init()
 
 SQUARE_SIZE = 80
-width = COLUMN_COUNT * SQUARE_SIZE
-height = (ROW_COUNT + 1) * SQUARE_SIZE
+width = num_col * SQUARE_SIZE
+height = (num_row + 1) * SQUARE_SIZE
 size = (width, height)
 
 screen = pygame.display.set_mode(size)
@@ -58,12 +58,12 @@ while not game_over:
     if turn == PLAYER and not game_over:
         col = random.randint(0, 6)
         #col, minimax_score = minimax(board, 5, True)
-        if is_valid_location(board, col):
+        if Is_valid(board, col):
             # pygame.time.wait(500)
-            row = get_next_open_row(board, col)
-            drop_piece(board, row, col, PLAYER_PIECE)
+            row = Find_next_row(board, col)
+            put_piece(board, row, col, AI1)
 
-            if winning_move(board, PLAYER_PIECE):
+            if Best_move(board, AI1):
                 label = myfont.render("Player 1 wins!!", 1, RED)
                 screen.blit(label, (40, 10))
                 game_over = True
@@ -78,11 +78,11 @@ while not game_over:
 
         col, minimax_score = AlphaBeta(board, 5, -math.inf, math.inf, True)
         #col = random.randint(0, 6)
-        if is_valid_location(board, col):
-            row = get_next_open_row(board, col)
-            drop_piece(board, row, col, AI_PIECE)
+        if Is_valid(board, col):
+            row = Find_next_row(board, col)
+            put_piece(board, row, col, AI2)
 
-            if winning_move(board, AI_PIECE):
+            if Best_move(board, AI2):
                 label = myfont.render("Player 2 wins!!", 1, YELLOW)
                 screen.blit(label, (40, 10))
                 game_over = True
