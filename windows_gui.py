@@ -1,6 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
 
+
+AI1_Option = 0
+AI2_Option = 0
+AI1_Level = 5
+AI2_Level = 5
+#main->game ->level
+
+
 def open_level_window():
     level_window = tk.Toplevel(main_window)
     level_window.title("Select Level")
@@ -11,11 +19,11 @@ def open_level_window():
 
     level_var = tk.StringVar()
 
-    level_easy = tk.Radiobutton(level_window, text="Easy", variable=level_var, value="easy")
+    level_easy = tk.Radiobutton(level_window, text="Easy", variable=level_var, value=1)
     level_easy.pack()
-    level_medium = tk.Radiobutton(level_window, text="Medium", variable=level_var, value="medium")
+    level_medium = tk.Radiobutton(level_window, text="Medium", variable=level_var, value=2)
     level_medium.pack()
-    level_hard = tk.Radiobutton(level_window, text="Hard", variable=level_var, value="hard")
+    level_hard = tk.Radiobutton(level_window, text="Hard", variable=level_var, value=3)
     level_hard.pack()
 
     level_button = tk.Button(level_window, text="Start Game", command=lambda: start_game(level_var.get()))
@@ -24,6 +32,7 @@ def open_level_window():
 def start_game(level=None):
     # Game logic goes here
     if level:
+
         messagebox.showinfo("Game Started", f"Game started with {level} level")
     else:
         messagebox.showinfo("Game Started", "Game started")
@@ -60,7 +69,8 @@ def open_game_window():
     def start_game_with_levels():
         algorithm1 = player1_algorithm_var.get()
         algorithm2 = player2_algorithm_var.get()
-
+        AI1_Option = algorithm1
+        AI2_Option = algorithm2
         if algorithm1 == "alphabeta" or algorithm2 == "alphabeta":
             open_level_window()
         else:

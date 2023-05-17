@@ -1,8 +1,8 @@
 import pygame
 
-SQUARE_SIZE = 80
-ROW_COUNT = 6
-COLUMN_COUNT = 7
+SQUARE = 80
+Rows = 6
+Cols = 7
 
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
@@ -10,30 +10,30 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
 EMPTY = 0
-PLAYER_PIECE = 1
-AI_PIECE = 2
+AI1_PIECE = 1
+AI2_PIECE = 2
 
 
-RADIUS = int(SQUARE_SIZE / 2 - 5)
-width = COLUMN_COUNT * SQUARE_SIZE
-height = (ROW_COUNT+1) * SQUARE_SIZE
+RADIUS = int(SQUARE / 2 - 5)
+width = Cols * SQUARE
+height = (Rows + 1) * SQUARE
 size = (width, height)
 
 screen = pygame.display.set_mode(size)
 
-def draw_board(board):
-    for c in range(COLUMN_COUNT):
-        for r in range(ROW_COUNT):
-            pygame.draw.rect(screen, BLUE, (c * SQUARE_SIZE, r * SQUARE_SIZE + SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+def drawBoard(board):
+    for c in range(Cols):
+        for r in range(Rows):
+            pygame.draw.rect(screen, BLUE, (c * SQUARE, r * SQUARE + SQUARE, SQUARE, SQUARE))
             pygame.draw.circle(screen, BLACK, (
-                int(c * SQUARE_SIZE + SQUARE_SIZE / 2), int(r * SQUARE_SIZE + SQUARE_SIZE + SQUARE_SIZE / 2)), RADIUS)
+                int(c * SQUARE + SQUARE / 2), int(r * SQUARE + SQUARE + SQUARE / 2)), RADIUS)
 
-    for c in range(COLUMN_COUNT):
-        for r in range(ROW_COUNT):
-            if board[r][c] == PLAYER_PIECE:
+    for c in range(Cols):
+        for r in range(Rows):
+            if board[r][c] == AI1_PIECE:
                 pygame.draw.circle(screen, RED, (
-                    int(c * SQUARE_SIZE + SQUARE_SIZE / 2), height - int(r * SQUARE_SIZE + SQUARE_SIZE / 2)), RADIUS)
-            elif board[r][c] == AI_PIECE:
+                    int(c * SQUARE + SQUARE / 2), height - int(r * SQUARE + SQUARE / 2)), RADIUS)
+            elif board[r][c] == AI2_PIECE:
                 pygame.draw.circle(screen, YELLOW, (
-                    int(c * SQUARE_SIZE + SQUARE_SIZE / 2), height - int(r * SQUARE_SIZE + SQUARE_SIZE / 2)), RADIUS)
+                    int(c * SQUARE + SQUARE / 2), height - int(r * SQUARE + SQUARE / 2)), RADIUS)
     pygame.display.update()
