@@ -4,7 +4,7 @@ import random
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 WINDOW_LENGTH = 4
-EMPTY = 0
+empty = 0
 PLAYER_PIECE = 1
 AI_PIECE = 2
 
@@ -23,12 +23,12 @@ def evaluate_window(window, piece):
 
     if window.count(piece) == 4:
         score += 100
-    elif window.count(piece) == 3 and window.count(EMPTY) == 1:
+    elif window.count(piece) == 3 and window.count(empty) == 1:
         score += 5
-    elif window.count(piece) == 2 and window.count(EMPTY) == 2:
+    elif window.count(piece) == 2 and window.count(empty) == 2:
         score += 2
 
-    if window.count(opp_piece) == 3 and window.count(EMPTY) == 1:
+    if window.count(opp_piece) == 3 and window.count(empty) == 1:
         score -= 4
 
     return score
@@ -51,10 +51,10 @@ def get_valid_locations(board):
 
 
 def is_terminal_node(board):
-    return winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
+    return Best_move(board, PLAYER_PIECE) or Best_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
 
 
-def winning_move(board, piece):
+def Best_move(board, piece):
     #horizontal 
     for c in range(COLUMN_COUNT - 3):
         for r in range(ROW_COUNT):
@@ -123,9 +123,9 @@ def minimax(board, depth, maximizing_player):
 
     if depth == 0 or is_terminal:
         if is_terminal:
-            if winning_move(board, AI_PIECE):
+            if Best_move(board, AI_PIECE):
                 return None, 100000000000000
-            elif winning_move(board, PLAYER_PIECE):
+            elif Best_move(board, PLAYER_PIECE):
                 return None, -10000000000000
             else:  # Game is over, no more valid moves
                 return None, 0
