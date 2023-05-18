@@ -57,7 +57,6 @@ def main():
                 sys.exit()
 
         if turn == AI1 and not gameOver:
-
             difficulty = chooseDifficulty(AI1_Level)
             if AI1_Option == "MinMax":
                 col, minimax_score = minimax(board, difficulty, True)
@@ -65,7 +64,6 @@ def main():
                 col, minimax_score = AlphaBeta(board, difficulty, -math.inf, math.inf, True)
             else:
                 col = random.randint(0, 6)
-
             if isValidLocation(board, col):
                 row = nextRow(board, col)
                 putPiece(board, row, col, AI1_PIECE)
@@ -79,6 +77,11 @@ def main():
                 turn += 1
                 turn = turn % 2
                 time.sleep(1)
+            else:
+                label = font.render("Draw!! GAME OVER", True, WHITE)
+                screen.blit(label, (40, 10)),
+                gameOver = True
+                drawBoard(board)
 
         if turn == AI2 and not gameOver:
             difficulty = chooseDifficulty(AI2_Level)
@@ -102,6 +105,11 @@ def main():
 
                 turn += 1
                 turn = turn % 2
+            else:
+                label = font.render("Draw!! GAME OVER", True, WHITE)
+                screen.blit(label, (40, 10)),
+                gameOver = True
+                drawBoard(board)
 
         if gameOver:
             pygame.time.wait(5000)

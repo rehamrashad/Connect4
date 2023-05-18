@@ -1,12 +1,17 @@
 import math
 import random
 
+import numpy as np
+
 AI1_PIECE = 1
 AI2_PIECE = 2
 Rows = 6
 Cols = 7
 WINDOW = 4
 EMPTY = 0
+
+
+
 
 def isWin(board, piece):
     # -
@@ -81,7 +86,10 @@ def score_position(board, piece):
 
 
 def isValidLocation(board, col):
-    return board[Rows - 1][col] == 0
+    if np.any(board[Rows - 1][col] == 0):
+        return True
+    else:
+        return False
 
 def putPiece(board, row, col, piece):
     board[row][col] = piece
