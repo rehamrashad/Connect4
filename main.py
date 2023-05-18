@@ -2,12 +2,10 @@ import sys
 import time
 
 import numpy as np
-
 from alpha_beta import *
 from gui import *
 from minmax import *
 from windows_gui import *
-
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -30,11 +28,15 @@ def initBoard():
 
 def printBoard(board):
     print(np.flip(board, 0))
-
-
+#
+# AI1_Level="aaa"
+# AI2_Level="bbb"
 def main():
     main_window.mainloop()
-    print(str(AI2_Option)+" "+str(AI2_Option)+"+++++++++++++++++++++++++++++++++")
+    print(AI1_Option+" "+AI2_Option+'     llllllllllll')
+    #print(AI1_Level+" "+AI2_Level+'     mmmmmmmmmmmmmmm')
+
+
     board = initBoard()
     printBoard(board)
     gameOver = False
@@ -53,10 +55,18 @@ def main():
 
         if turn == AI1 and not gameOver:
 
-            if AI1_Option == 1:
+            if AI1_Option == "MinMax":
                 col, minimax_score = minimax(board, 5, True)
-            elif AI1_Option == 2:
-                col, minimax_score = AlphaBeta(board, AI1_Level, -math.inf, math.inf, True)
+            elif AI1_Option == "AlphaBeta":
+
+                # if AI1_Level == "Easy":
+                #     AI1_Level=2
+                # elif AI1_Level == "Medium":
+                #     AI1_Level=4
+                # else:
+                #     AI1_Level=5
+
+                col, minimax_score = AlphaBeta(board, 5, -math.inf, math.inf, True)
             else:
                 col = random.randint(0, 6)
 
@@ -76,10 +86,18 @@ def main():
                 time.sleep(1)
 
         if turn == AI2 and not gameOver:
-            if AI2_Option == 1:
+            if AI2_Option == "MinMax":
                 col, minimax_score = minimax(board, 5, True)
-            elif AI2_Option == 2:
-                col, minimax_score = AlphaBeta(board, AI2_Level, -math.inf, math.inf, True)
+            elif AI2_Option == "AlphaBeta":
+
+                # if AI2_Level == "Easy":
+                #     AI2_Level=2
+                # elif AI2_Level == "Medium":
+                #     AI2_Level=4
+                # else:
+                #     AI2_Level=5
+
+                col, minimax_score = AlphaBeta(board, 5, -math.inf, math.inf, True)
             else:
                 col = random.randint(0, 6)
 
