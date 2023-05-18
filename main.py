@@ -8,7 +8,7 @@ from minmax import *
 from gui2 import *
 
 BLUE = (0, 0, 255)
-BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
@@ -29,10 +29,6 @@ def initBoard():
     return board
 
 
-def printBoard(board):
-    print(np.flip(board, 0))
-
-
 def chooseDifficulty(level):
     if level == "Easy":
         return 1
@@ -44,19 +40,14 @@ def chooseDifficulty(level):
 
 def main():
     app.mainloop()
-    print("\n" + AI1_Option + " " + AI2_Option + '\n')
-    print(AI1_Level + " " + AI2_Level + '\n')
     root.withdraw()
-    print("\n" + AI1_Option + " " + AI2_Option + '\n')
-    print(AI1_Level + " " + AI2_Level + '\n')
     board = initBoard()
-    printBoard(board)
     gameOver = False
     pygame.init()
     screen = pygame.display.set_mode(size)
     drawBoard(board)
     pygame.display.update()
-    font = pygame.font.SysFont("monospace", 40)
+    font = pygame.font.SysFont("Tahoma", 40)
     turn = AI1
 
     while not gameOver:
@@ -80,12 +71,10 @@ def main():
                 putPiece(board, row, col, AI1_PIECE)
 
                 if isWin(board, AI1_PIECE):
-                    label = font.render("Player 1 wins!!", 1, RED)
-                    print("Player 1 wins!!")
+                    label = font.render("The Winner is Player 1 ", True, RED)
                     screen.blit(label, (40, 10))
                     gameOver = True
 
-                printBoard(board)
                 drawBoard(board)
                 turn += 1
                 turn = turn % 2
@@ -105,19 +94,17 @@ def main():
                 putPiece(board, row, col, AI2_PIECE)
 
                 if isWin(board, AI2_PIECE):
-                    label = font.render("Player 2 wins!!", 1, YELLOW)
-                    print("Player 2 wins!!")
+                    label = font.render("The Winner is Player 2 ", True, YELLOW)
                     screen.blit(label, (40, 10))
                     gameOver = True
 
-                printBoard(board)
                 drawBoard(board)
 
                 turn += 1
                 turn = turn % 2
 
         if gameOver:
-            pygame.time.wait(3000)
+            pygame.time.wait(5000)
 
 
 main()

@@ -60,10 +60,6 @@ class App(tk.Frame):
         self.submit.pack()
 
     def selection(self):
-        print("Thing 1:", self.var1.get())
-        print("Thing 2:", self.var2.get())
-        print("Thing 3:", self.var3.get())
-        print("Thing 4:", self.var4.get())
         global AI1_Option
         AI1_Option = self.var1.get()
         global AI1_Level

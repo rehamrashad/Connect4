@@ -5,7 +5,7 @@ Rows = 6
 Cols = 7
 
 BLUE = (0, 0, 255)
-BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 
@@ -21,11 +21,12 @@ size = (width, height)
 
 screen = pygame.display.set_mode(size)
 
+
 def drawBoard(board):
     for c in range(Cols):
         for r in range(Rows):
             pygame.draw.rect(screen, BLUE, (c * SQUARE, r * SQUARE + SQUARE, SQUARE, SQUARE))
-            pygame.draw.circle(screen, BLACK, (
+            pygame.draw.circle(screen, WHITE, (
                 int(c * SQUARE + SQUARE / 2), int(r * SQUARE + SQUARE + SQUARE / 2)), RADIUS)
 
     for c in range(Cols):
