@@ -5,7 +5,8 @@ import numpy as np
 from alpha_beta import *
 from gui import *
 from minmax import *
-from windows_gui import *
+from gui2 import *
+
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -22,21 +23,32 @@ width = COLS * SQUARE
 height = (ROWS + 1) * SQUARE
 size = (width, height)
 
+
 def initBoard():
     board = np.zeros((ROWS, COLS))
     return board
 
+
 def printBoard(board):
     print(np.flip(board, 0))
-#
-# AI1_Level="aaa"
-# AI2_Level="bbb"
+
+
+def chooseDifficulty(level):
+    if level == "Easy":
+        return 1
+    elif level == "Medium":
+        return 3
+    else:
+        return 5
+
+
 def main():
-    main_window.mainloop()
-    print(AI1_Option+" "+AI2_Option+'     llllllllllll')
-    #print(AI1_Level+" "+AI2_Level+'     mmmmmmmmmmmmmmm')
-
-
+    app.mainloop()
+    print("\n" + AI1_Option + " " + AI2_Option + '\n')
+    print(AI1_Level + " " + AI2_Level + '\n')
+    root.withdraw()
+    print("\n" + AI1_Option + " " + AI2_Option + '\n')
+    print(AI1_Level + " " + AI2_Level + '\n')
     board = initBoard()
     printBoard(board)
     gameOver = False
@@ -45,7 +57,7 @@ def main():
     drawBoard(board)
     pygame.display.update()
     font = pygame.font.SysFont("monospace", 40)
-    turn = random.randint(AI1, AI2)
+    turn = AI1
 
     while not gameOver:
 
@@ -55,18 +67,11 @@ def main():
 
         if turn == AI1 and not gameOver:
 
+            difficulty = chooseDifficulty(AI1_Level)
             if AI1_Option == "MinMax":
-                col, minimax_score = minimax(board, 5, True)
+                col, minimax_score = minimax(board, difficulty, True)
             elif AI1_Option == "AlphaBeta":
-
-                # if AI1_Level == "Easy":
-                #     AI1_Level=2
-                # elif AI1_Level == "Medium":
-                #     AI1_Level=4
-                # else:
-                #     AI1_Level=5
-
-                col, minimax_score = AlphaBeta(board, 5, -math.inf, math.inf, True)
+                col, minimax_score = AlphaBeta(board, difficulty, -math.inf, math.inf, True)
             else:
                 col = random.randint(0, 6)
 
@@ -76,6 +81,7 @@ def main():
 
                 if isWin(board, AI1_PIECE):
                     label = font.render("Player 1 wins!!", 1, RED)
+                    print("Player 1 wins!!")
                     screen.blit(label, (40, 10))
                     gameOver = True
 
@@ -86,18 +92,11 @@ def main():
                 time.sleep(1)
 
         if turn == AI2 and not gameOver:
+            difficulty = chooseDifficulty(AI2_Level)
             if AI2_Option == "MinMax":
-                col, minimax_score = minimax(board, 5, True)
+                col, minimax_score = minimax(board, difficulty, True)
             elif AI2_Option == "AlphaBeta":
-
-                # if AI2_Level == "Easy":
-                #     AI2_Level=2
-                # elif AI2_Level == "Medium":
-                #     AI2_Level=4
-                # else:
-                #     AI2_Level=5
-
-                col, minimax_score = AlphaBeta(board, 5, -math.inf, math.inf, True)
+                col, minimax_score = AlphaBeta(board, difficulty, -math.inf, math.inf, True)
             else:
                 col = random.randint(0, 6)
 
@@ -107,6 +106,7 @@ def main():
 
                 if isWin(board, AI2_PIECE):
                     label = font.render("Player 2 wins!!", 1, YELLOW)
+                    print("Player 2 wins!!")
                     screen.blit(label, (40, 10))
                     gameOver = True
 
