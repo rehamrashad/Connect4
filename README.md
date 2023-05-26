@@ -1,2 +1,2 @@
-# Connect4
+# Connect 4 Game with GUI and two algorithms.
  
