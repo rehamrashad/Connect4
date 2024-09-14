@@ -9,16 +9,7 @@ Connect Four with AI Opponents is a Python project that implements the classic C
 - **Player Versus AI:** Enables players to challenge AI opponents, with customizable difficulty levels and algorithm choices for each AI.
 - **Game Logic Management:** Manages game logic, player turns, AI moves, and termination conditions seamlessly, providing an engaging gaming experience.
 
-## Requirements
 
-- Python 3.x
-- Pygame (for the Pygame GUI)
-- Tkinter (for the Tkinter GUI)
-
-## Usage
-
-1. Clone the repository:git clone https://github.com/rehamrashad/Connect4 
-2. Choose your preferred AI algorithm and difficulty level, and enjoy the game!
 
 
 
